@@ -17,12 +17,22 @@ export const initialState = {
   ]
 };
 
-export const carReducer = (state, reducer) => {
+export const carReducer = (state = initialState, action) => {
+  console.log(action);
   switch (action.type) {
-    case ADD_FEATURE:
+    case BUY_ITEM:
+      // const feature = state.store.find(feature => feature.id === action.payload)
       return {
         ...state,
-        editing: !state.editing
+        car: {
+          ...state.car,
+          // features: [...state.cars.features, feature] // don't need if you pass whole object in
+          features: [...state.car.features, action.payload]
+          // features: [
+          //   // add id of the feature we clicked on to the features array
+          //   ...state.store
+          // ]
+        }
       };
     case REMOVE_FEATURE:
       return {
@@ -30,8 +40,6 @@ export const carReducer = (state, reducer) => {
         title: action.payload,
         editing: !state.editing
       };
-    case BUY_ITEM:
-      return {};
     default:
       return state;
   }

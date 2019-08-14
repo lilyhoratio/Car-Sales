@@ -5,14 +5,19 @@ import AddedFeatures from "./components/AddedFeatures";
 import AdditionalFeatures from "./components/AdditionalFeatures";
 import Total from "./components/Total";
 
-const App = () => {
-  const removeFeature = item => {
-    // dispatch an action here to remove an item
-  };
+//import action functions
+import { removeFeature, buyItem } from "./components/actions";
 
-  const buyItem = item => {
-    // dipsatch an action here to add an item
-  };
+import { connect } from "react-redux";
+
+const App = ({ state, removeFeature, buyItem }) => {
+  // const removeFeature = item => {
+  //   // dispatch an action here to remove an item
+  // };
+
+  // const buyItem = item => {
+  //   // dipsatch an action here to add an item
+  // };
 
   return (
     <div className="boxes">
@@ -21,11 +26,27 @@ const App = () => {
         <AddedFeatures car={state.car} />
       </div>
       <div className="box">
-        <AdditionalFeatures store={state.store} />
+        <AdditionalFeatures store={state.store} buyItem={buyItem} />
         <Total car={state.car} additionalPrice={state.additionalPrice} />
       </div>
     </div>
   );
 };
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    state
+    // state: state // equivalent
+
+    // needed if...
+    // car: state.car,
+    // store: state.store,
+    // additionalPrice: state.additionalPrice
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  // {}
+  { removeFeature, buyItem } //hooks action creators to react app, and now it has functions as props
+)(App);
