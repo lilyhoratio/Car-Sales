@@ -1,14 +1,11 @@
-import React, { useState } from "react";
-
-import { connect } from "react-redux";
-import { buyItem } from "./actions";
+import React from "react";
 
 const AdditionalFeature = props => {
   console.log("add", props);
 
   const addNewFeature = e => {
     e.preventDefault(); // prevent event from bubbling up and refreshing page
-    props.buyItem(props.feature);
+    props.buyItem(props.feature); // payload = props.feature (v8 engine)
   };
 
   return (
@@ -21,15 +18,5 @@ const AdditionalFeature = props => {
     </li>
   );
 };
-
-// const mapStateToProps = state => {
-//   return {
-//     name: state.name
-//   };
-// };
-// export default connect(
-//   mapStateToProps,
-//   { buyItem }
-// )(AdditionalFeature);
 
 export default AdditionalFeature;

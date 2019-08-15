@@ -11,19 +11,11 @@ import { removeFeature, buyItem } from "./components/actions";
 import { connect } from "react-redux";
 
 const App = ({ state, removeFeature, buyItem }) => {
-  // const removeFeature = item => {
-  //   // dispatch an action here to remove an item
-  // };
-
-  // const buyItem = item => {
-  //   // dipsatch an action here to add an item
-  // };
-
   return (
     <div className="boxes">
       <div className="box">
         <Header car={state.car} />
-        <AddedFeatures car={state.car} />
+        <AddedFeatures car={state.car} removeFeature={removeFeature} />
       </div>
       <div className="box">
         <AdditionalFeatures store={state.store} buyItem={buyItem} />

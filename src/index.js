@@ -11,6 +11,7 @@ import "./styles.scss";
 import { carReducer } from "./components/reducers";
 
 export const store = createStore(carReducer);
+// export const store = createStore(rootReducer);
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(

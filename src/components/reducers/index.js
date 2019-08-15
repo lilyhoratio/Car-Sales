@@ -1,4 +1,4 @@
-import { ADD_FEATURE, REMOVE_FEATURE, BUY_ITEM } from "../actions";
+import { REMOVE_FEATURE, BUY_ITEM } from "../actions";
 
 export const initialState = {
   additionalPrice: 0,
@@ -17,6 +17,9 @@ export const initialState = {
   ]
 };
 
+// reducer - take original state and some action which defines what you want to change, and outputs a new state
+// avoid mutating state
+
 export const carReducer = (state = initialState, action) => {
   console.log(action);
   switch (action.type) {
@@ -26,19 +29,20 @@ export const carReducer = (state = initialState, action) => {
         ...state,
         car: {
           ...state.car,
-          // features: [...state.cars.features, feature] // don't need if you pass whole object in
+          // features: [...state.cars.features, feature] // don't need to do this if you pass whole object in
           features: [...state.car.features, action.payload]
-          // features: [
-          //   // add id of the feature we clicked on to the features array
-          //   ...state.store
-          // ]
         }
       };
     case REMOVE_FEATURE:
       return {
         ...state,
-        title: action.payload,
-        editing: !state.editing
+        car: {
+          ...state.car,
+          // features: [...state.car.features, action.payload]
+          features: state.car.features.filter(
+            feature => feature.id !== action.payload.id
+          )
+        }
       };
     default:
       return state;
